@@ -33,3 +33,29 @@
   border: 0;
   margin: 1em;
 }
+
+.gridItemContent {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  background-color: #000000;
+  text-align: center;
+  bottom: 0;
+  padding: 5px;
+}
+
+.gridItem p {
+  margin: 0;
+}
+
+.gridItem p:first-child {
+  font-size: 14px;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.gridItem p:last-child {
+  font-size: 12px;
+}

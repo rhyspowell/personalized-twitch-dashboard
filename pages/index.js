@@ -1,18 +1,55 @@
 // Main entry point of your app
+import React, { useState } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import StreamerGrid from '../components/StreamerGrid'
 
 const Home = () => {
+  // State
+  const [favouriteChannels, setFavouriteChannels] = useState([])
+  
+  // Actions
+  const addStreamChannel = async event => {
+    // Prevent the page from redirecting
+    event.preventDefault()
 
-    // Render Methods
-    const renderForm = () => {
-        <div className={styles.formContainer}>
-            <form>
-                <input id="name" placeholder="Twitch channel Name" type="text" required />
-                <button type="submit">Add Streamer</button>
-            </form>
-        </div>
+    const { value } = event.target.elements.name
+
+    if (value) {
+      console.log("Value: ", value)
+
+      //Call twitch search API
+      const path = `https://${window.location.hostname}`
+
+      const response = await fetch(`${path}/api/twitch`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: value })
+      })
+
+      const json = await response.json
+
+      console.log("From the server: ", json.data)
+
+      setFavouriteChannels(prevState => [...prevState, json.data])
+
+      event.target.elements.name.value = ""
     }
+    
+  }
+
+  // Render Methods
+  const renderForm = () => (
+    <div className={styles.formContainer}>
+      <form onSubmit={addStreamChannel}>
+        <input id="name" placeholder="Twitch channel Name" type="text" required />
+        <button type="submit">Add Streamer</button>
+      </form>
+    </div>
+  )
+
 
   return (
     <div className={styles.container}>
@@ -22,6 +59,7 @@ const Home = () => {
       </Head>
       <div className={styles.inputContainer}>
         {renderForm()}
+        <StreamerGrid channels={favouriteChannels} />
       </div>
     </div>
   )
