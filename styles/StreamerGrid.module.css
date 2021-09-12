@@ -14,16 +14,16 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  min-width: 150px;
-  max-width: 250px;
-  min-height: 250px;
-  max-height: 300px;
+  width: 180px;
+  height: 180px;
   border-radius: 10px;
   border: 4px #7F53ACCC solid;
   background-color: #00000080;
   color: white;
   font-size: 14px;
   margin-right: 1em;
+  position: relative;
+  overflow: hidden;
 }
 
 .gridItem button {
@@ -32,6 +32,7 @@
   border-radius: 10px;
   border: 0;
   margin: 1em;
+  background-color: #00000080;
 }
 
 .gridItemContent {
@@ -58,4 +59,16 @@
 
 .gridItem p:last-child {
   font-size: 12px;
+}
+
+.gridNoItems {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 25%;
+  background-color: #00000080;
+  color: white;
+  border-radius: 10px;
+  padding: 1em;
+  margin: 0 auto;
 }

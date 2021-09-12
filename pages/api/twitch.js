@@ -10,7 +10,7 @@ export default async (req, res) => {
 
       if (channelData) {
         console.log("CHANNEL DATA: ", channelData)
-        res.status(200).json({ data: channelData })
+        res.status(200).json({ "data" : channelData})
     }
 
     res.status(404).send()

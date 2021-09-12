@@ -1,8 +1,9 @@
 // Main entry point of your app
 import React, { useState } from 'react'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import StreamerGrid from '../components/StreamerGrid'
+import styles from '../styles/Home.module.css'
+
 
 const Home = () => {
   // State
@@ -20,7 +21,7 @@ const Home = () => {
 
       //Call twitch search API
       const path = `https://${window.location.hostname}`
-
+      console.log("call the api")
       const response = await fetch(`${path}/api/twitch`, {
         method: 'POST',
         headers: {
@@ -28,11 +29,9 @@ const Home = () => {
         },
         body: JSON.stringify({ data: value })
       })
+      const json = await response.json()
 
-      const json = await response.json
-
-      console.log("From the server: ", json.data)
-
+      console.log("Jason Data: ", json)
       setFavouriteChannels(prevState => [...prevState, json.data])
 
       event.target.elements.name.value = ""
@@ -59,7 +58,7 @@ const Home = () => {
       </Head>
       <div className={styles.inputContainer}>
         {renderForm()}
-        <StreamerGrid channels={favouriteChannels} />
+        <StreamerGrid channels={favouriteChannels} setChannels={setFavouriteChannels} />
       </div>
     </div>
   )
