@@ -6,7 +6,9 @@ export default async (req, res) => {
   try {
     if (req.method === 'POST') {
       if (req.body) {
+
         const { key, value, action } = JSON.parse(req.body)
+
         
         if (action === 'GET_CHANNELS') {
           const value = await getValue(key)
@@ -15,20 +17,20 @@ export default async (req, res) => {
           } else {
             res.status(404).send()
           }
-        } else if (action === 'DELETE_CHANNEL') { 
-          const keyValue = await getValue("CHANNELS")
-          if (keyValue) {
-            const valArray = keyValue.split(",")
-            const channelIndex = valArray.indexOf(value)
+        //} else if (action === 'DELETE_CHANNEL') { 
+          //const keyValue = await getValue("CHANNELS")
+          //if (keyValue) {
+          //  const valArray = keyValue.split(",")
+          //  const channelIndex = valArray.indexOf(value)
 
-            if (channelIndex !== -1) {
-              valArray.splice(channelIndex, 1)
-            } else {
-              res.status(404).send()
-            }
+          //  if (channelIndex !== -1) {
+          //    valArray.splice(channelIndex, 1)
+          //  } else {
+          //    res.status(404).send()
+          //  }
 
-            res.status(200).json({ data: valArray.join(",") })
-          }
+          //  res.status(200).json({ data: valArray.join(",") })
+          //}
         } else {
           const success = await setKey(key, value)
           if (success) {
@@ -53,6 +55,8 @@ const setKey = async (key, value) => {
       method: "POST",
       body: `${key}=${value}`
     })
+
+    console.log("SET KEY STATUS: ", result.status)
 
     if (result.status === 200) {
       return true

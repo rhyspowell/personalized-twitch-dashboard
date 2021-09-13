@@ -27,12 +27,15 @@
 }
 
 .gridItem button {
-  width: 75%;
-  height: 30px;
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 20px;
   border-radius: 10px;
   border: 0;
-  margin: 1em;
-  background-color: #00000080;
+  margin: 5px;
+  background-color: red;
+  z-index: 1;
 }
 
 .gridItemContent {
